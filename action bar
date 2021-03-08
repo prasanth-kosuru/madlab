@@ -1,0 +1,84 @@
+<?xml version = "1.0" encoding = "utf-8"?>
+<LinearLayout xmlns:android = "http://schemas.android.com/apk/res/android"
+   xmlns:tools = "http://schemas.android.com/tools"
+   android:layout_width = "match_parent"
+   android:layout_height = "match_parent"
+   tools:context = ".MainActivity">
+   <TextView
+      android:layout_width = "wrap_content"
+      android:layout_height = "wrap_content"
+      android:text = "Custom Action Bar"
+      android:textSize = "20sp"/>
+</LinearLayout>
+
+import android.os.Bundle;
+import android.support.v7.app.ActionBar;
+import android.support.v7.app.AppCompatActivity;
+import android.view.View;
+import android.widget.TextView;
+import android.widget.Toast;
+public class MainActivity extends AppCompatActivity {
+   @Override
+   protected void onCreate(Bundle savedInstanceState) {
+      super.onCreate(savedInstanceState);
+      setContentView(R.layout.activity_main);
+      this.getSupportActionBar().setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
+      getSupportActionBar().setDisplayShowCustomEnabled(true);
+      getSupportActionBar().setCustomView(R.layout.custom_action_bar);
+      //getSupportActionBar().setElevation(0);
+      View view = getSupportActionBar().getCustomView();
+      TextView name = view.findViewById(R.id.name);
+      name.setOnClickListener(new View.OnClickListener() {
+         @Override
+         public void onClick(View v) {
+            Toast.makeText(MainActivity.this, "You have clicked tittle", Toast.LENGTH_LONG).show();
+         }
+      });
+   }
+}
+Step 3 − Create a layout for action bar in res folder as custom_action_bar.xml shown below
+
+<?xml version = "1.0" encoding = "utf-8"?>
+<LinearLayout xmlns:android = "http://schemas.android.com/apk/res/android"
+   xmlns:app = "http://schemas.android.com/apk/res-auto"
+   android:layout_width = "match_parent"
+   android:layout_height = "wrap_content"
+   android:gravity = "center_vertical"
+   android:padding = "10dp"
+   android:weightSum = "1">
+   <LinearLayout
+      android:layout_width = "0dp"
+      android:layout_height = "match_parent"
+      android:layout_weight = "0.6">
+      <ImageView
+         android:layout_width = "wrap_content"
+         android:layout_height = "match_parent"
+         android:src = "@drawable/ic_face_red_400_24dp" />
+      <TextView
+         android:id = "@+id/name"
+         android:layout_width = "match_parent"
+         android:layout_height = "wrap_content"
+         android:layout_marginLeft = "10dp"
+         android:text = "Instagram"
+         android:textSize = "20sp"
+         android:textColor = "#000"
+         android:textStyle = "bold"
+         app:fontFamily = "@font/allan_bold" />
+   </LinearLayout>
+   <LinearLayout
+      android:layout_width = "0dp"
+      android:layout_height = "match_parent"
+      android:layout_marginRight = "10dp"
+      android:layout_weight = "0.4"
+      android:gravity = "end">
+   <ImageView
+      android:layout_width = "wrap_content"
+      android:layout_height = "match_parent"
+      android:src = "@drawable/ic_local_post_office_red_400_24dp" />
+   <ImageView
+      android:layout_width = "wrap_content"
+      android:layout_height = "match_parent"
+      android:layout_marginLeft = "20dp"
+      android:src = "@drawable/ic_send_red_400_24dp" />
+   </LinearLayout>
+</LinearLayout>
